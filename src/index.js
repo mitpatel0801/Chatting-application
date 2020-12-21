@@ -22,11 +22,11 @@ io.on("connection", (socket) => {
 
     socket.on("join", ({ username, room }, callback) => {
 
-        const user = addUser({ id: socket.id, username, room })
+
         if (user.error) {
             return callback(user.error)
         }
-
+        const user = addUser({ id: socket.id, username, room })
         socket.join(user.room)
         //showing message call to individual user
         socket.emit("message", generateMessage("Welcome!", "Admin"))
